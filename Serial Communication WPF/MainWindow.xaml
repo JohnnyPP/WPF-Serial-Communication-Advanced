@@ -1,0 +1,52 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="Serial_Communication_WPF.MainWindow"
+        Title="MainWindow" Background="{x:Null}" Visibility="Visible" WindowStartupLocation="CenterScreen" Width="323" Height="300" BorderThickness="0" ResizeMode="CanResizeWithGrip" Foreground="Black" OpacityMask="Black" WindowStyle="None" Margin="0"
+        Icon="Data Resources\Serial.ico">
+    <Window.Resources>
+    	<XmlDataProvider x:Key="ComPorts" Source="CommsData.xml" XPath="/Comms/Ports" />
+    	<XmlDataProvider x:Key="ComSpeed" Source="CommsData.xml" XPath="/Comms/Baud" />
+    </Window.Resources>
+	<Border CornerRadius="10" Margin="0,0,-1.47,0" MouseDown="Move_Window">
+		<Border.Background>
+			<LinearGradientBrush EndPoint="0.778,0.839" MappingMode="RelativeToBoundingBox" StartPoint="-0.088,0.369">
+				<GradientStop Color="#FF747474" Offset="0.061"/>
+				<GradientStop Color="White" Offset="1"/>
+			</LinearGradientBrush>
+		</Border.Background>
+		<Grid Margin="0" >
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="104" />
+				<ColumnDefinition Width="*" MinWidth="197.47" />
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="22.243" />
+				<RowDefinition Height="18.61" />
+				<RowDefinition Height="17.604" />
+				<RowDefinition Height="18.599" />
+				<RowDefinition />
+			</Grid.RowDefinitions>
+			<TextBlock Grid.Row="1" TextAlignment="Center" Text="Comm Port" Foreground="Black" />
+			<ComboBox Grid.Column="1" Grid.Row="1" x:Name="Comm_Port_Names" ItemsSource="{Binding Source={StaticResource ComPorts}}" Margin="0,0,58,0" HorizontalAlignment="Stretch"/>
+			<Button Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" Content="Connect" Click="Connect_Comms" x:Name="Connect_btn" Style="{DynamicResource Connect_Btn_Style}" Width="59.893"/>
+
+			<TextBlock Grid.Row="2" TextAlignment="Center" Text="Baud Rate" Foreground="Black" />
+            <ComboBox Grid.Column="1" Grid.Row="2" x:Name="Baud_Rates" HorizontalAlignment="Stretch" ItemsSource="{Binding Source={StaticResource ComSpeed}}" />
+
+            <TextBlock Text="Send" Grid.Column="0" Grid.Row="3" TextAlignment="Center" Foreground="Black"/>
+			<TextBox x:Name ="SerialData" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Stretch" TextAlignment="Center" Margin="0,0,30,0"/>
+			<Button Grid.Column="1" Grid.Row="3" HorizontalAlignment="Right" Content="Send" Click="Send_Data" Style="{DynamicResource Send_Btn_Style}"/>
+
+			<TextBlock Grid.Column="0" Grid.Row="4" Text="Recieved Data" TextAlignment="Center" Foreground="Black"/>
+			<RichTextBox Grid.Column="1" Grid.Row="4" x:Name="Commdata"/>
+			<Button Content="Button" Grid.Column="1" RenderTransformOrigin="1.684,0.257" Height="19" Style="{DynamicResource Close_Btn_Stle}" HorizontalAlignment="Right" Width="19" Margin="0,0,10,0" Click="Close_Form"/>
+			<Button Content="Button" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,30,0" Width="19" Height="19" Style="{DynamicResource Maximise_Btn_Style}" Click="Max_size"/>
+			<Button Content="Button" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,49,0" Width="19" Height="19" Style="{DynamicResource Minimise_Btn_Styl}" Click="Min_size"/>
+
+
+
+
+		</Grid>
+	</Border>
+</Window>
